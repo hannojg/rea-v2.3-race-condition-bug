@@ -6,18 +6,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function AnimatedScreen() {
-  console.log("CHANGE ME TO something else to SEE THE UPDATE taking place");
+  // console.log("CHANGE ME TO something else to SEE THE UPDATE taking place");
 
   const someMeasuredValue = useSharedValue(0);
   const onLayout = useCallback(() => {
     someMeasuredValue.value = 60;
   }, [someMeasuredValue]);
 
-  const animStyle = useAnimatedStyle(() => ({
-    transform: [{
-      translateY: someMeasuredValue.value,
-    }]
-  }), [someMeasuredValue]);
+  const animStyle = useAnimatedStyle(() => {
+    console.log("shared value:", someMeasuredValue.value);
+
+    return ({
+      transform: [{
+        translateY: someMeasuredValue.value,
+      }]
+    });
+}, [someMeasuredValue]);
 
   return (
     <View style={styles.container}>
